@@ -1,0 +1,27 @@
+<!-- tasks/templates/tasks/tasks_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Lista de Tareas</h1>
+    <a href="{% url 'create_task' %}">Crear Nueva Tarea</a>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.TITULO }}</strong> - {{ task.DESCRIPCION }}
+                <br>
+                Fecha Límite: {{ task.FECHA_LIMITE }}
+                <br>
+                <a href="{% url 'update_task' task.TAREA_ID %}">Editar</a>
+                |
+                <a href="{% url 'delete_task' task.TAREA_ID %}">Eliminar</a>
+            </li>
+        {% empty %}
+            <p>No hay tareas vigentes.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
