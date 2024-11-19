@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Tarea</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tasks/css/create_task.css' %}">
 </head>
 <body>
-    <h1>Crear Nueva Tarea</h1>
+    <h1 style="font-family: Verdana, sans-serif; color: yellowgreen;">Crear Nueva Tarea</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
