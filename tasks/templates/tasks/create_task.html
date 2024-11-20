@@ -6,14 +6,116 @@
     <title>Crear Tarea</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'tasks/css/create_task.css' %}">
+    <style>
+        /* General */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #32344F; /* Fondo principal */
+            color: #E4E4E4; /* Color de texto general */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            background: #3D3F5E; /* Fondo del contenedor */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Títulos */
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00D689; /* Títulos principales */
+        }
+
+        /* Formulario */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form input, 
+        .form select, 
+        .form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #46486D;
+            border-radius: 4px;
+            background-color: #2F314B;
+            color: #E4E4E4;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form input:focus, 
+        .form select:focus, 
+        .form textarea:focus {
+            border-color: #00D689; /* Resalta el campo activo */
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: #009EFF; /* Botón principal */
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #007FCC; /* Hover para botón principal */
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: #FFC107; /* Botón secundario amarillo */
+            color: #32344F;
+        }
+
+        .btn-secondary:hover {
+            background-color: #E0A800; /* Hover amarillo oscuro */
+            transform: scale(1.05);
+        }
+
+        /* Enlaces */
+        a {
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="font-family: Verdana, sans-serif; color: yellowgreen;">Crear Nueva Tarea</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="{% url 'tasks_list' %}">Volver a la lista de tareas</a>
+    <body>
+        <div class="container">
+            <h1 class="title">Crear Nueva Tarea</h1>
+            <form method="post" class="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <a href="{% url 'tasks_list' %}" class="btn btn-secondary">Volver a la lista de tareas</a>
+        </div>
+    </body>
 </body>
 </html>

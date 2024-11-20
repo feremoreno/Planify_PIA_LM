@@ -4,24 +4,162 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Tareas</title>
+    <style>
+        body {
+            font-family: sans-serif, Verdana, Arial;
+            background-color: #32344F; /* Fondo principal */
+            color: #E4E4E4; /* Color de texto general */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 800px;
+            background: #3D3F5E; /* Fondo del contenedor */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        /* Títulos */
+        .title {
+            text-align: center;
+            font-weight: 900;
+            font-size: 38px;
+            margin-bottom: 20px;
+            color: #00D689; /* Títulos principales */
+        }
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary {
+            background-color: #009EFF; /* Botón principal */
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #007FCC; /* Hover para botón principal */
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            background-color: #FFC107; /* Color secundario llamativo */
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #E0A800;
+            transform: scale(1.05);
+        }
+        .btn-danger {
+            background-color: #D64550; /* Botón de peligro */
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #B33A43;
+            transform: scale(1.05);
+        }
+        /* Lista de tareas */
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .task-item {
+            padding: 15px;
+            border-bottom: 1px solid #46486D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-details {
+            max-width: 70%;
+        }
+
+        .task-title {
+            font-size: 16px;
+            color: #E4E4E4; /* Texto principal */
+            margin: 0 0 5px;
+        }
+
+        .task-description {
+            font-size: 14px;
+            color: #A8A8C3; /* Descripción */
+            margin: 0 0 10px;
+        }
+
+        .task-deadline {
+            font-size: 12px;
+            color: #D3D3E3; /* Fechas */
+            margin: 0;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Mensaje sin tareas */
+        .no-tasks {
+            text-align: center;
+            color: #A8A8C3;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        /* Pie de página */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #E4E4E4;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 0;
+            background-color: #3D3F5E; /* Fondo que coincide con el contenedor */
+        }
+        .footer p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Tareas</h1>
-    <a href="{% url 'create_task' %}">Crear Nueva Tarea</a>
-    <ul>
-        {% for task in tasks %}
-            <li>
-                <strong>{{ task.TITULO }}</strong> - {{ task.DESCRIPCION }}
-                <br>
-                Fecha Límite: {{ task.FECHA_LIMITE }}
-                <br>
-                <a href="{% url 'update_task' task.TAREA_ID %}">Editar</a>
-                |
-                <a href="{% url 'delete_task' task.TAREA_ID %}">Eliminar</a>
-            </li>
-        {% empty %}
-            <p>No hay tareas vigentes.</p>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1 class="title">Lista de Tareas</h1>
+        <a href="{% url 'create_task' %}" class="btn btn-primary">Crear Nueva Tarea</a>
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="task-item">
+                    <div class="task-details">
+                        <strong class="task-title">{{ task.TITULO }}</strong>
+                        <p class="task-description">{{ task.DESCRIPCION }}</p>
+                        <p class="task-deadline">Fecha Límite: {{ task.FECHA_LIMITE }}</p>
+                    </div>
+                    <div class="task-actions">
+                        <a href="{% url 'update_task' task.TAREA_ID %}" class="btn btn-secondary">Editar</a>
+                        <a href="{% url 'delete_task' task.TAREA_ID %}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </li>
+            {% empty %}
+                <p class="no-tasks">No hay tareas vigentes.</p>
+            {% endfor %}
+        </ul>
+        <!-- Pie de página -->
+        <footer class="footer">
+            <p>Desarrollado por: Fernando Esquivel, Juan Angel Garza y Diego Gonzales</p>
+        </footer>
+    </div>
 </body>
 </html>

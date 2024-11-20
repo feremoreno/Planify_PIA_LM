@@ -13,7 +13,7 @@ services:
       - db_data:/var/lib/mysql            # Persistir datos en volumen
       # - .:/app                           # Comparte el directorio local con el contenedor
     ports:
-      - "3306:3306"                      # Exponer puerto para conexión externa
+      - "3307:3306"                      # Exponer puerto para conexión externa
 
   # Servicio para la aplicación Django
   web:
