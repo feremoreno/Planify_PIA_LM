@@ -14,7 +14,7 @@ class Task(models.Model):
     FECHA_LIMITE = models.DateTimeField()
 
     class Meta:
-        db_table = 'TAREAS_CARD'  # Especifica que Django debe usar la tabla existente
+        db_table = 'TAREAS_CARD'
 
     def __str__(self):
         return self.TITULO

@@ -1,30 +1,16 @@
 version: '3.9'
 
 services:
-  # Servicio para la base de datos MySQL
   db:
     image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    ports:
+      - "3307:3306" 
     environment:
-      MYSQL_ROOT_PASSWORD: 1967188  # Cambia esto por tu propia contraseña
-      MYSQL_DATABASE: Planify_PIA            # Nombre de la base de datos que quieres crear
-      MYSQL_USER: root                   # Usuario de la base de datos
-      MYSQL_PASSWORD: 1967188           # Contraseña del usuario de la base de datos
+      MYSQL_ROOT_PASSWORD: 1967188
+      MYSQL_DATABASE: Planify_PIA
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1967188
     volumes:
-      - db_data:/var/lib/mysql            # Persistir datos en volumen
-      # - .:/app                           # Comparte el directorio local con el contenedor
-    ports:
-      - "3307:3306"                      # Exponer puerto para conexión externa
-
-  # Servicio para la aplicación Django
-  web:
-    build: .
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-    volumes:
-      - .:/app                           # Monta el código local al contenedor
-    ports:
-      - "8000:8000"                      # Exponer puerto para acceder a Django
-    depends_on:
-      - db                               # Django debe esperar que MySQL esté listo
-
-volumes:
-  db_data:                               # Volumen persistente para la base de datos
+      - ./Planify_PIA.sql:/docker-entrypoint-initdb.d/Planify_PIA.sql
